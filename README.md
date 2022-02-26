@@ -1,1 +1,1 @@
-# Fbs-ResMlp on Cifar-10
+# FBS-ResMLP on Cifar-10
