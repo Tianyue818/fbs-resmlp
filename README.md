@@ -17,4 +17,4 @@
 ## References
 [1] Gao, Xitong, et al. "Dynamic channel pruning: Feature boosting and suppression." [https://arxiv.org/abs/810.05331] (ICLR 2019).
 
-[2] Hugo Touvron, et al. "ResMLP: Feedforward networks for image classification with data-efficient training"[https://arxiv.org/abs/2105.03404](CVPR 2021).
+[2] Hugo Touvron, et al. "ResMLP: Feedforward networks for image classification with data-efficient training"[arxiv](https://arxiv.org/abs/2105.03404)(CVPR 2021).
