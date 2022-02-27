@@ -2,10 +2,6 @@ import torch
 from math import ceil
 from tqdm import tqdm
 
-def global_avgpool2d(x):
-    # input : a tensor with size [batch, C, H, W]
-    x = torch.mean(torch.mean(x, dim=-1), dim=-1)
-    return x  # [batch, C]
 
 def winner_take_all(x, sparsity_ratio):
     # input : a tensor with size [batch, C]
@@ -56,8 +52,8 @@ def train(epochs, trainloader, testloader, costFunc, model, device, optimizer):
         if test_acc > best_acc:
             best_acc = test_acc
             torch.save(model.state_dict(),
-                       f'checkpoints/best_fbs=True_0.5.pt')
-        with open(f'checkpoints/train_log_fbs=True_0.5.tsv', 'a') as log_file:
+                       f'checkpoints/best_SGD_fbs=True_0.5.pt')
+        with open(f'checkpoints/train_log_SGD_fbs=True_0.5.tsv', 'a') as log_file:
             log_file.write(
                 f'{epoch}\t{train_loss}\t{test_loss}\t{train_acc}\t{test_acc}\t{best_acc}\n')
         print(

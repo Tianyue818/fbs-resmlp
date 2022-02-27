@@ -15,9 +15,9 @@ def main():
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
   model.to(device)
   costFunc = torch.nn.CrossEntropyLoss()
-  optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
+  optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
-  train(200,
+  train(500,
         trainloader,
         testloader,
         costFunc,

@@ -51,13 +51,13 @@ class MlpBlock(nn.Module):
         self.beta = nn.Parameter(layer_scale * torch.ones((dim)), requires_grad=True)
 
     def forward(self, x):
+        g = self.channel_saliency_predictor(x.transpose(1, 2))
+        post_mask = winner_take_all(g, self.sparsity_ratio)
+        post_mask = post_mask.transpose(1, 2)
         x = self.affine(x)
         x_t = x.transpose(1, 2)
-        g = self.channel_saliency_predictor(x_t)
-        post_mask = winner_take_all(g, self.sparsity_ratio)
         x_t = self.linear_patch(x_t)
         x_t = x_t.transpose(1, 2)
-        post_mask = post_mask.transpose(1, 2)
         x = x + self.gamma * x_t
         x = self.post_affine(x)
         x = x * post_mask
