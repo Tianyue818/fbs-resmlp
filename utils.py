@@ -56,8 +56,8 @@ def train(epochs, trainloader, testloader, costFunc, model, device, optimizer):
         if test_acc > best_acc:
             best_acc = test_acc
             torch.save(model.state_dict(),
-                       f'/best_fbs=True_0.5.pt')
-        with open(f'/train_log_fbs=True_0.5.tsv', 'a') as log_file:
+                       f'checkpoints/best_fbs=True_0.5.pt')
+        with open(f'checkpoints/train_log_fbs=True_0.5.tsv', 'a') as log_file:
             log_file.write(
                 f'{epoch}\t{train_loss}\t{test_loss}\t{train_acc}\t{test_acc}\t{best_acc}\n')
         print(
