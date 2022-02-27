@@ -54,13 +54,13 @@ class MlpBlock(nn.Module):
         g = self.channel_saliency_predictor(x.transpose(1, 2))
         post_mask = winner_take_all(g, self.sparsity_ratio)
         post_mask = post_mask.transpose(1, 2)
+        x = x * post_mask
         x = self.affine(x)
         x_t = x.transpose(1, 2)
         x_t = self.linear_patch(x_t)
         x_t = x_t.transpose(1, 2)
         x = x + self.gamma * x_t
         x = self.post_affine(x)
-        x = x * post_mask
         x = x + self.beta * self.fc(x)
         return x, torch.mean(torch.sum(g, dim=-1))
 
