@@ -17,6 +17,7 @@ def winner_take_all(x, sparsity_ratio):
         return x
 
 def train(epochs, trainloader, testloader, costFunc, model, device, optimizer):
+    best_acc = 0
     for epoch in range(epochs):
         train_loss = 0.
         total_num = 0
@@ -52,6 +53,12 @@ def train(epochs, trainloader, testloader, costFunc, model, device, optimizer):
                 correct_num += prediction.eq(labels).sum().item()
             test_loss = test_loss / total_step
             test_acc = 100. * correct_num / total_num
-
+        if test_acc > best_acc:
+            best_acc = test_acc
+            torch.save(model.state_dict(),
+                       f'/best_fbs=True_0.5.pt')
+        with open(f'/train_log_fbs=True_0.5.tsv', 'a') as log_file:
+            log_file.write(
+                f'{epoch}\t{train_loss}\t{test_loss}\t{train_acc}\t{test_acc}\t{best_acc}\n')
         print(
-            f'\Epoch {epoch} Training Loss: {train_loss}--Training Acc: {train_acc} Test loss: {test_loss}--Test Acc: {test_acc}')
+            f'/Epoch {epoch} Train Loss: {train_loss}--Train Acc: {train_acc} Test loss: {test_loss}--Test Acc: {test_acc}')
