@@ -7,9 +7,15 @@
 ## Implementation
 + Dataset: CIFAR-10
 + Model: Res-MLP
-+ Lambda: 1e-8
++ Optimizer: Adam(1e-2)
 + Batch Size: 256
-+ Optimizer: Adam(1e-4)
++ ResMLP dim: 384
++ ResMLP depth: 12
++ ResMLP Patch size: 8×8
++ sparsity ratio: 0.5
+## Hyperparameter
++ Lr: 1e-2 (weight decay:1e-5)
++ Layer scale: 1e-5
 ## 
 ```
     python main.py
