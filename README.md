@@ -12,10 +12,10 @@
 + ResMLP dim: 384
 + ResMLP depth: 12
 + ResMLP Patch size: 8×8
-+ StepLR size: 30 gamma: 0.1
++ StepLR size: 10 gamma: 0.8
 + sparsity ratio: 0.5
 ## Hyperparameter
-+ Lr: 1e-2 (weight decay:1e-4)
++ Lr: 3e-3 (weight decay:1e-4)
 + Layer scale: 1e-2
 ## 
 ```
