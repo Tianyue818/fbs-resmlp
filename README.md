@@ -8,7 +8,7 @@
 + Dataset: CIFAR-10
 + Model: Res-MLP
 + Optimizer: Adam(1e-2)
-+ Batch Size: 256
++ Batch Size: 128
 + ResMLP dim: 384
 + ResMLP depth: 12
 + ResMLP Patch size: 8×8
