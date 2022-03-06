@@ -4,13 +4,13 @@ from dataset import get_loader
 from model import FBSResMLP
 
 
-model = FBSResMLP(384, 32, 24, 3, 16, 10)
+model = FBSResMLP(384, 32, 6, 3, 4, 10)
+model.cuda()
 state_dict = torch.load(
-    f'checkpoints/best_Lamb_fbs=True_0.5.pt')
+    f'checkpoints/best_Lamb_fbs=False.pt')
 model.load_state_dict(state_dict)
-
-trainloader, valloader, testloader = get_loader(batch_size=128)
-for epoch in range(10):
+trainloader, valloader, testloader = get_loader(batch_size=256)
+for epoch in range(50):
     with torch.no_grad():
         total_step = len(testloader)
         test_loss = 0
@@ -21,7 +21,7 @@ for epoch in range(10):
             data = data.cuda()
             labels = labels.cuda()
             prediction = model(data)
-            loss = torch.nn.CrossEntropyLoss(prediction, labels)
+            loss = torch.nn.functional.cross_entropy(prediction, labels)
             test_loss += loss.item()
             _, prediction = prediction.max(dim=1)
             total_num += labels.shape[0]
