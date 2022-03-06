@@ -1,6 +1,6 @@
 import torchvision
 from torchvision import transforms
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
 def get_loader(batch_size):
     transform_train = transforms.Compose([
         transforms.RandomCrop(32, padding=4),
@@ -17,8 +17,13 @@ def get_loader(batch_size):
         'data', train=True, transform=transform_train, download=True)
     testdata = torchvision.datasets.CIFAR10(
         'data', train=False, transform=transform_test, download=True)
-    trainloader = DataLoader(traindata, batch_size=batch_size,
+
+    train_db, val_db = random_split(traindata, [40000, 10000])
+
+    trainloader = DataLoader(train_db, batch_size=batch_size,
                               shuffle=True, pin_memory=True)
+    valloader = DataLoader(val_db, batch_size=batch_size,
+                             shuffle=True, pin_memory=True)
     testloader = DataLoader(testdata, batch_size=batch_size,
                              shuffle=False, pin_memory=True)
-    return trainloader, testloader
+    return trainloader, valloader, testloader

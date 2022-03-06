@@ -35,7 +35,7 @@ class PatchEmbed(nn.Module):
         return x
 
 class MlpBlock(nn.Module):
-    def __init__(self, dim, num_patch, fbs=True, sparsity_ratio=0.5, layer_scale=1e-4):
+    def __init__(self, dim, num_patch, fbs=True, sparsity_ratio=0.5, layer_scale=0.5):
         super().__init__()
         self.fbs = fbs
         self.sparsity_ratio = sparsity_ratio
@@ -70,7 +70,7 @@ class FBSResMLP(nn.Module):
     self.patch_projector = PatchEmbed(patch_size=npatches, in_chans=in_chan,
                                       embed_dim=dim)
     self.blocks = nn.ModuleList([
-      MlpBlock(dim, (img_size // npatches) ** 2)
+      MlpBlock(dim, (img_size // npatches) ** 2, layer_scale=0.5)
       for _ in range(depth)])
     self.affine = Affine(dim)
     self.linear_classifier = nn.Linear(dim, n_classes)
