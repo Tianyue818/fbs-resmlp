@@ -4,7 +4,7 @@ from dataset import get_loader
 from model import FBSResMLP
 
 
-model = FBSResMLP(384, 32, 6, 3, 4, 10)
+model = FBSResMLP(384, 32, 12, 3, 4, 10)
 model.cuda()
 state_dict = torch.load(
     f'checkpoints/best_Lamb_fbs=False.pt')

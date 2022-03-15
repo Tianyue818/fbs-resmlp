@@ -4,7 +4,6 @@ from tqdm import tqdm
 
 
 def winner_take_all(x, sparsity_ratio):
-    # input : a tensor with size [batch, C]
     if sparsity_ratio < 1.0:
         k = ceil((1 - sparsity_ratio) * x.size(-1))
         inactive_idx = (-x).topk(k - 1, 1)[1]

@@ -17,7 +17,6 @@ def get_loader(batch_size):
         'data', train=True, transform=transform_train, download=True)
     testdata = torchvision.datasets.CIFAR10(
         'data', train=False, transform=transform_test, download=True)
-
     train_db, val_db = random_split(traindata, [40000, 10000])
 
     trainloader = DataLoader(train_db, batch_size=batch_size,
